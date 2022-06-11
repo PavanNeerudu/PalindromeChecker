@@ -1,10 +1,23 @@
-# PalindromeChecker
-// TODO(user): Add simple overview of use/purpose
+# Palindrome Checker
+The purpose of this to create a simple Custom Resource Defintion and a Custom operator watching the resource. 
 
 ## Description
-// TODO(user): An in-depth paragraph about your project and overview of use
+PalindromeChecker will be a custom Resource that I will create. It has an input field that contains a string. The Kubernetes Cluster will be configured using this yaml manifest. The Controller/Operator keeps an eye on this resource and extracts the input string from the object if a new resource is created. This is how it goes:-  
+* When a resource is first created, its status will be empty because nothing has been done yet.  
+* Now, if the string is **abcdcba**, I'll compare the first and last letters, and if they're the same, I'll remove them both and change the resource's status to **bcdcb** in the controller which will then be communicated to cluster. Since the status has been updated, Kubernetes will call the controller again, and the first and last are compared in the same way as before. The status is then changed to **cdc**, followed by **d**, and finally **Palindrome**. If any of the above stages fail, the status is changed to **Not Palindrome**. These calls will be made by Kubernetes control manager indefinitely until the object/status resource's does not change. This is the logic I'll be implementing in the custom controller. Based on your need, the CRD definition and controller code can be changed.
 
 ## Getting Started
+1. Some Key Terms  
+    * ### Kubernetes  
+        **Kubernetes** is an open-source container orchestration platform that automates deployment, management and scaling of applications.Before we understand what Custom Resource Definition(CRD) is, there are some concepts that you need to get acquainted with.  
+        * **Resource** is an endpoint in Kubernetes API that allows you to store an API Object of any kind.
+        * A custom Resource allows you to create your own API objects and define their kind just like Pod, Deployment and Replicaset, etc.
+        <script src="https://gist.github.com/pavanNeerudu/f8bf2db66d5fac43e4191073931b13a2.js"></script>
+        Now, when the above CRD YAML is applied, your Kubernetes cluster will become aware of the Custom Resource PalindromeChecker and knows the structure of the API object to expect from the user of kind PalindromeChecker
+    * 
+
+    * ###
+
 You’ll need a Kubernetes cluster to run against. You can use [KIND](https://sigs.k8s.io/kind) to get a local cluster for testing, or run against a remote cluster.
 **Note:** Your controller will automatically use the current context in your kubeconfig file (i.e. whatever cluster `kubectl cluster-info` shows).
 
