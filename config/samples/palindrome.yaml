@@ -1,0 +1,6 @@
+apiVersion: demo.pavan.com/v1
+kind: PalindromeChecker
+metadata:
+  name: palindrome
+spec:
+  input: abcdedcba

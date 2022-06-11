@@ -1,0 +1,6 @@
+apiVersion: demo.pavan.com/v1
+kind: PalindromeChecker
+metadata:
+  name: n-palindrome
+spec:
+  input: 1234wa4321

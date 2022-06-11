@@ -1,0 +1,24 @@
+# permissions for end users to edit palindromecheckers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: palindromechecker-editor-role
+rules:
+- apiGroups:
+  - demo.pavan.com
+  resources:
+  - palindromecheckers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - demo.pavan.com
+  resources:
+  - palindromecheckers/status
+  verbs:
+  - get

@@ -1,0 +1,16 @@
+domain: pavan.com
+layout:
+- go.kubebuilder.io/v3
+projectName: palindromechecker
+repo: github.com/pavanneerudu/PalindromeChecker
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: pavan.com
+  group: demo
+  kind: PalindromeChecker
+  path: github.com/pavanneerudu/PalindromeChecker/api/v1
+  version: v1
+version: "3"

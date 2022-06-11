@@ -1,0 +1,20 @@
+# permissions for end users to view palindromecheckers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: palindromechecker-viewer-role
+rules:
+- apiGroups:
+  - demo.pavan.com
+  resources:
+  - palindromecheckers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - demo.pavan.com
+  resources:
+  - palindromecheckers/status
+  verbs:
+  - get
