@@ -1,4 +1,4 @@
-# palindromechecker
+# PalindromeChecker
 // TODO(user): Add simple overview of use/purpose
 
 ## Description
