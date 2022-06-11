@@ -12,7 +12,45 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
         **Kubernetes** is an open-source container orchestration platform that automates deployment, management and scaling of applications.Before we understand what Custom Resource Definition(CRD) is, there are some concepts that you need to get acquainted with.  
         * **Resource** is an endpoint in Kubernetes API that allows you to store an API Object of any kind.
         * A custom Resource allows you to create your own API objects and define their kind just like Pod, Deployment and Replicaset, etc.
-        <script src="https://gist.github.com/pavanNeerudu/f8bf2db66d5fac43e4191073931b13a2.js"></script>
+        ```yaml
+        apiVersion: apiextensions.k8s.io/v1
+        kind: CustomResourceDefinition
+        metadata:
+          # name must match the spec fields below, and be in the form: <plural>.<group>
+          name: palindromecheckers.demo.pavan.com
+        spec:
+          # group name to use for REST API: /apis/<group>/<version>
+          group: demo.pavan.com
+          # list of versions supported by this CustomResourceDefinition
+          versions:
+            - name: v1
+              # Each version can be enabled/disabled by Served flag.
+              served: true
+              # One and only one version must be marked as the storage version.
+              storage: true
+              schema:
+                openAPIV3Schema:
+                  type: object
+                  properties:
+                    spec:
+                      description: PalindromeCheckerSpec defines the desired state of PalindromeChecker
+                      properties:
+                        input:
+                          type: string
+                      type: object
+          # either Namespaced or Cluster
+          scope: Namespaced
+          names:
+            # plural name to be used in the URL: /apis/<group>/<version>/<plural>
+            plural: palindromecheckers
+            # singular name to be used as an alias on the CLI and for display
+            singular: palindromechecker
+            # kind is normally the CamelCased singular type. Your resource manifests use this.
+            kind: PalindromeChecker
+            # shortNames allow shorter string to match your resource on the CLI
+            shortNames:
+            - pc
+        ```
         Now, when the above CRD YAML is applied, your Kubernetes cluster will become aware of the Custom Resource PalindromeChecker and knows the structure of the API object to expect from the user of kind PalindromeChecker
     * 
 
