@@ -225,26 +225,26 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
     * `logger.Info` logs a non-error message with the given key/value pairs as context. Here, we logged a simple message for us to see it the logs.  
        
     It’s time to get our PalindromeCheckerObject.  
-    ```go
-    	PalindromeCheckerObject := &demov1.PalindromeChecker{}
+    ```go  
+    	PalindromeCheckerObject := &demov1.PalindromeChecker{}  
 	err := r.Get(ctx, req.NamespacedName, PalindromeCheckerObject)
     ```
     &emsp; Here, we initialize PalindromeCheckerObject and obtain our resource by calling r. Get(). This method implements client.Client behind the scenes and returns our object.
 
     Since the Reconcile() is called for even updation and deletion, we check if our object was deleted in the previous step and if that is the case, we return nil as error, so that Reconcile() will not be called again.
-    ```go
-    	if err != nil {
-	    //Resource was not found.
-	    if errors.IsNotFound(err) {
-	    return ctrl.Result{}, nil
-	    }
-	    //Other errors
-	    logger.Error(err, "Error looking up for PalindromeChecker Object")
-	    return ctrl.Result{}, err
+    ```go  
+    	if err != nil {  
+	    //Resource was not found.  
+	    if errors.IsNotFound(err) {  
+	    return ctrl.Result{}, nil  
+	    }  
+	    //Other errors  
+	    logger.Error(err, "Error looking up for PalindromeChecker Object")  
+	    return ctrl.Result{}, err  
 	}
     ```  
     We then use PalindromeChecherObject.Status to get the status of our object.  We take different steps depending on the status. This is where the true logic lies. Depending on your functionality, you can alter your logic.
-    ```go
+    ```go  
     	    status := PalindromeCheckerObject.Status.Status
 
 	    if status == "" {
