@@ -227,25 +227,25 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
     It’s time to get our PalindromeCheckerObject.  
     ```go
     	PalindromeCheckerObject := &demov1.PalindromeChecker{}
-	    err := r.Get(ctx, req.NamespacedName, PalindromeCheckerObject)
+	err := r.Get(ctx, req.NamespacedName, PalindromeCheckerObject)
     ```
     &emsp; Here, we initialize PalindromeCheckerObject and obtain our resource by calling r. Get(). This method implements client.Client behind the scenes and returns our object.
 
     Since the Reconcile() is called for even updation and deletion, we check if our object was deleted in the previous step and if that is the case, we return nil as error, so that Reconcile() will not be called again.
     ```go
     	if err != nil {
-		    //Resource was not found.
-		    if errors.IsNotFound(err) {
-		    	return ctrl.Result{}, nil
-		    }
-		    //Other errors
-		    logger.Error(err, "Error looking up for PalindromeChecker Object")
-		    return ctrl.Result{}, err
+	    //Resource was not found.
+	    if errors.IsNotFound(err) {
+	    return ctrl.Result{}, nil
 	    }
+	    //Other errors
+	    logger.Error(err, "Error looking up for PalindromeChecker Object")
+	    return ctrl.Result{}, err
+	}
     ```  
     We then use PalindromeChecherObject.Status to get the status of our object.  We take different steps depending on the status. This is where the true logic lies. Depending on your functionality, you can alter your logic.
     ```go
-    	status := PalindromeCheckerObject.Status.Status
+    	    status := PalindromeCheckerObject.Status.Status
 
 	    if status == "" {
 	    	PalindromeCheckerObject.Status.Status = PalindromeCheckerObject.Spec.Input
@@ -291,6 +291,8 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
     make run
     ```
 * While the controller is run, I will watch the PalindromeChecker resource in one terminal and apply the sample YAML file from other terminal. The following video shows the same 
+
+https://user-images.githubusercontent.com/86822039/173200082-edb98c1c-01ad-40a3-9041-1e8f02761701.mp4
 
 ## License
 
