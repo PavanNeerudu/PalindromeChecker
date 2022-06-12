@@ -226,8 +226,8 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
        
     It’s time to get our PalindromeCheckerObject.  
     ```go  
-    	PalindromeCheckerObject := &demov1.PalindromeChecker{}  
-	err := r.Get(ctx, req.NamespacedName, PalindromeCheckerObject)
+	    PalindromeCheckerObject := &demov1.PalindromeChecker{}  
+	    err := r.Get(ctx, req.NamespacedName, PalindromeCheckerObject)
     ```
     &emsp; Here, we initialize PalindromeCheckerObject and obtain our resource by calling r. Get(). This method implements client.Client behind the scenes and returns our object.
 
