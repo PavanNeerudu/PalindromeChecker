@@ -278,11 +278,11 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
 
     The last step in the code is to update the resource's status. Isn't that what we've already done? We've changed it in our code, but the <u>Kubernetes cluster is unaware of it</u>. The following code snippet can be used to accomplish this.
     ```go
-        err = r.Status().Update(ctx, PalindromeCheckerObject)
+	    err = r.Status().Update(ctx, PalindromeCheckerObject)
 	    if err != nil {
 	       	logger.Error(err, "Error updating the status of PalindromeCheckerObject")
 	       	return ctrl.Result{}, err
-    	}
+	    }
 	    return ctrl.Result{}, nil
     }
     ```
