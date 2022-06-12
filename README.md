@@ -226,26 +226,26 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
        
     It’s time to get our PalindromeCheckerObject.  
     ```go  
-    	PalindromeCheckerObject := &demov1.PalindromeChecker{}  
-	err := r.Get(ctx, req.NamespacedName, PalindromeCheckerObject)
+	    PalindromeCheckerObject := &demov1.PalindromeChecker{}  
+	    err := r.Get(ctx, req.NamespacedName, PalindromeCheckerObject)
     ```
     &emsp; Here, we initialize PalindromeCheckerObject and obtain our resource by calling r. Get(). This method implements client.Client behind the scenes and returns our object.
 
     Since the Reconcile() is called for even updation and deletion, we check if our object was deleted in the previous step and if that is the case, we return nil as error, so that Reconcile() will not be called again.
-    ```go  
-    	if err != nil {  
-	    //Resource was not found.  
-	    if errors.IsNotFound(err) {  
-	    return ctrl.Result{}, nil  
-	    }  
-	    //Other errors  
-	    logger.Error(err, "Error looking up for PalindromeChecker Object")  
-	    return ctrl.Result{}, err  
-	}
+    ```go
+	    if err != nil {  
+	    	//Resource was not found.  
+	    	if errors.IsNotFound(err) {  
+	    		return ctrl.Result{}, nil  
+	    	}  
+	    	//Other errors  
+	    	logger.Error(err, "Error looking up for PalindromeChecker Object")  
+	    	return ctrl.Result{}, err  
+	    }
     ```  
     We then use PalindromeChecherObject.Status to get the status of our object.  We take different steps depending on the status. This is where the true logic lies. Depending on your functionality, you can alter your logic.
-    ```go  
-    	    status := PalindromeCheckerObject.Status.Status
+    ```go
+	    status := PalindromeCheckerObject.Status.Status
 
 	    if status == "" {
 	    	PalindromeCheckerObject.Status.Status = PalindromeCheckerObject.Spec.Input
@@ -278,11 +278,11 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
 
     The last step in the code is to update the resource's status. Isn't that what we've already done? We've changed it in our code, but the <u>Kubernetes cluster is unaware of it</u>. The following code snippet can be used to accomplish this.
     ```go
-        err = r.Status().Update(ctx, PalindromeCheckerObject)
+	    err = r.Status().Update(ctx, PalindromeCheckerObject)
 	    if err != nil {
 	       	logger.Error(err, "Error updating the status of PalindromeCheckerObject")
 	       	return ctrl.Result{}, err
-    	}
+	    }
 	    return ctrl.Result{}, nil
     }
     ```
