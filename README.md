@@ -232,20 +232,20 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
     &emsp; Here, we initialize PalindromeCheckerObject and obtain our resource by calling r. Get(). This method implements client.Client behind the scenes and returns our object.
 
     Since the Reconcile() is called for even updation and deletion, we check if our object was deleted in the previous step and if that is the case, we return nil as error, so that Reconcile() will not be called again.
-    ```go  
-    	if err != nil {  
-	    //Resource was not found.  
-	    if errors.IsNotFound(err) {  
-	    return ctrl.Result{}, nil  
-	    }  
-	    //Other errors  
-	    logger.Error(err, "Error looking up for PalindromeChecker Object")  
-	    return ctrl.Result{}, err  
-	}
+    ```go
+	    if err != nil {  
+	    	//Resource was not found.  
+	    	if errors.IsNotFound(err) {  
+	    		return ctrl.Result{}, nil  
+	    	}  
+	    	//Other errors  
+	    	logger.Error(err, "Error looking up for PalindromeChecker Object")  
+	    	return ctrl.Result{}, err  
+	    }
     ```  
     We then use PalindromeChecherObject.Status to get the status of our object.  We take different steps depending on the status. This is where the true logic lies. Depending on your functionality, you can alter your logic.
-    ```go  
-    	    status := PalindromeCheckerObject.Status.Status
+    ```go
+	    status := PalindromeCheckerObject.Status.Status
 
 	    if status == "" {
 	    	PalindromeCheckerObject.Status.Status = PalindromeCheckerObject.Spec.Input
