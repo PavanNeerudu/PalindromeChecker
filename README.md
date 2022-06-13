@@ -175,10 +175,7 @@ PalindromeChecker will be a custom Resource that I will create. It has an input 
 * Now that we have defined out PalindromeChecker, let’s go and apply our CRD YAML manifiest.  
         Before, applying the YAML manifest, PalindromeChecker is not recognised by k8s cluster.
         <p align="center"><img src="https://user-images.githubusercontent.com/86822039/173192043-9327f29c-8067-4084-aeb7-733e250cab83.png"></p>
-        Applying YAML manifets after genearating manifest by running the following command  
-        ```ssh
-        make manifests;make install
-        ```
+        Applying YAML manifets after genearating manifest by running `make manifests;make install`  
         <p align="center"><img src="https://user-images.githubusercontent.com/86822039/173192208-aa083dab-53c9-4417-a90c-25e1c9fd1bca.png"></p>Now, k8s cluster can recongnise PalindromeChecker.
 
 * Let’s create a resource and apply it into our cluster. There is a sample YAML file in config/sample. I am editing it in accordance with our definition	and applying it to our cluster. The yaml file is 
